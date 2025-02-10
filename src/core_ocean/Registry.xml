@@ -112,6 +112,7 @@
 					description="Determines if the initial conditions should be read from a restart file, or an input file."
 					possible_values=".true. or .false."
 		/>
+<<<<<<< HEAD
 		<nml_option name="config_restart_timestamp_name" type="character" default_value="Restart_timestamp" units="unitless"
 					description="Path to the filename for restart timestamps to be read and written from."
 					possible_values="Path to a file."
@@ -150,12 +151,111 @@
 		/>
 	</nml_record>
 	<nml_record name="decomposition" mode="forward;analysis;init">
+=======
+		<nml_option name="config_start_time" type="character" default_value="0000-01-01_00:00:00" units="unitless"
+		            description="Timestamp describing the initial time of the simulation. If it is set to 'file', the initial time is read from restart_timestamp."
+		            possible_values="'YYYY-MM-DD_HH:MM:SS' or 'file'"
+		/>
+		<nml_option name="config_stop_time" type="character" default_value="none" units="unitless"
+		            description="Timestamp descriping the final time of the simulation. If it is set to 'none' the final time is determined from config_start_time and config_run_duration."
+		            possible_values="'YYYY-MM-DD_HH:MM:SS' or 'none'"
+		/>
+		<nml_option name="config_run_duration" type="character" default_value="0_06:00:00" units="unitless"
+		            description="Timestamp describing the length of the simulation. If it is set to 'none' the duraction is determined from config_start_time and config_stop_time. config_run_duration overrides inconsistent values of config_stop_time."
+		            possible_values="'DDDD_HH:MM:SS' or 'none'"
+		/>
+		<nml_option name="config_calendar_type" type="character" default_value="360day" units="unitless"
+		            description="Selection of the type of calendar that should be used in the simulation."
+		            possible_values="'gregorian', 'gregorian_noleap', or '360day'"
+		/>
+	</nml_record>
+	<nml_record name="io">
+		<nml_option name="config_input_name" type="character" default_value="grid.nc" units=""
+		            description=""
+		            possible_values=""
+		/>
+		<nml_option name="config_output_name" type="character" default_value="output.nc" units=""
+		            description=""
+		            possible_values=""
+		/>
+		<nml_option name="config_restart_name" type="character" default_value="restart.nc" units=""
+		            description=""
+		            possible_values=""
+		/>
+		<nml_option name="config_restart_interval" type="character" default_value="0_06:00:00" units=""
+		            description=""
+		            possible_values=""
+		/>
+		<nml_option name="config_output_interval" type="character" default_value="0_06:00:00" units=""
+		            description=""
+		            possible_values=""
+		/>
+		<nml_option name="config_stats_interval" type="character" default_value="0_01:00:00" units=""
+		            description=""
+		            possible_values=""
+		/>
+		<nml_option name="config_write_stats_on_startup" type="logical" default_value=".true." units=""
+		            description=""
+		            possible_values=""
+		/>
+		<nml_option name="config_write_output_on_startup" type="logical" default_value=".true." units=""
+		            description=""
+		            possible_values=""
+		/>
+		<nml_option name="config_frames_per_outfile" type="integer" default_value="1000" units=""
+		            description=""
+		            possible_values=""
+		/>
+		<nml_option name="config_pio_num_iotasks" type="integer" default_value="0" units=""
+		            description=""
+		            possible_values=""
+		/>
+		<nml_option name="config_pio_stride" type="integer" default_value="1" units=""
+		            description=""
+		            possible_values=""
+		/>
+	</nml_record>
+	<nml_record name="time_integration">
+		<nml_option name="config_dt" type="real" default_value="3000.0" units="s"
+		            description="Length of model time-step."
+		            possible_values="Any positive real value, but limited by CFL condition."
+		/>
+		<nml_option name="config_time_integrator" type="character" default_value="split_explicit" units="unitless"
+		            description="Time integration method."
+		            possible_values="'split_explicit', 'RK4', 'unsplit_explicit'"
+		/>
+	</nml_record>
+	<nml_record name="grid">
+>>>>>>> a365deb25 (Modifying namelist character types to not have two layers of quotes.)
 		<nml_option name="config_num_halos" type="integer" default_value="3" units="unitless"
 					description="Determines the number of halo cells extending from a blocks owned cells (Called the 0-Halo). The default of 3 is the minimum that can be used with monotonic advection."
 					possible_values="Any positive integer value."
 		/>
+<<<<<<< HEAD
 		<nml_option name="config_block_decomp_file_prefix" type="character" default_value="graph.info.part." units="unitless"
 					description="Defines the prefix for the block decomposition file. Can include a path. The number of blocks is appended to the end of the prefix at run-time."
+=======
+		<nml_option name="config_vert_coord_movement" type="character" default_value="uniform_stretching" units="unitless"
+		            description="Determines the vertical coordinate movement type. 'uniform_stretching' distrubtes SSH perturbations through all vertical levels, 'fixed' places them all in the top level, 'user_specified' allows the input file to determine the distribution, and 'isopycnal' causes levels to be pure isopycnal."
+		            possible_values="'uniform_stretching', 'fixed', 'user_specified', 'isopycnal'"
+		/>
+		<nml_option name="config_alter_ICs_for_pbcs" type="character" default_value="zlevel_pbcs_off" units="unitless"
+		            description="Determines the method of alteration for partial bottom cells. 'zlevel_pbcs_on' alters the initial conditions for partial bottom cells, 'zlevel_pbcs_off' alters the initial conditions to have full cells everwhere, and 'off' does nothing to the initial conditions."
+		            possible_values="'zlevel_pbcs_on', 'zlevel_pbcs_off', 'off'"
+		/>
+		<nml_option name="config_min_pbc_fraction" type="real" default_value="0.10" units="unitless"
+		            description="Determines the minimum fraction of a cell altering the initial conditions can create."
+		            possible_values="Any real between 0 and 1."
+		/>
+		<nml_option name="config_check_ssh_consistency" type="logical" default_value=".true." units=""
+		            description="Enables a check to determine if the SSH is consistent across relevant variables."
+		            possible_values=""
+		/>
+	</nml_record>
+	<nml_record name="decomposition">
+		<nml_option name="config_block_decomp_file_prefix" type="character" default_value="graph.info.part." units="unitless"
+		            description="Defines the prefix for the block decomposition file. Can include a path. The number of blocks is appended to the end of the prefix at run-time."
+>>>>>>> a365deb25 (Modifying namelist character types to not have two layers of quotes.)
 					possible_values="Any path/prefix to a block decomposition file."
 		/>
 		<nml_option name="config_number_of_blocks" type="integer" default_value="0" units="unitless"
@@ -167,7 +267,11 @@
 					possible_values=".true. or .false."
 		/>
 		<nml_option name="config_proc_decomp_file_prefix" type="character" default_value="graph.info.part." units="unitless"
+<<<<<<< HEAD
 					description="Defines the prefix for the processor decomposition file. This file is only read if config_explicit_proc_decomp is .true. The number of processors is appended to the end of the prefix at run-time."
+=======
+		            description="Defines the prefix for the processor decomposition file. This file is only read if config_explicit_proc_decomp is .true. The number of processors is appended to the end of the prefix at run-time."
+>>>>>>> a365deb25 (Modifying namelist character types to not have two layers of quotes.)
 					possible_values="Any path/prefix to a processor decomposition file."
 		/>
 	</nml_record>
@@ -676,6 +780,7 @@
 					possible_values="Any positive real value."
 		/>
 	</nml_record>
+<<<<<<< HEAD
 	<nml_record name="forcing" mode="init;forward">
 		<nml_option name="config_use_bulk_wind_stress" type="logical" default_value=".false." units="unitless"
 					description="Controls if zonal and meridional components of windstress are used to build surface wind stress."
@@ -823,6 +928,12 @@
 		<nml_option name="config_vert_tracer_adv" type="character" default_value="stencil" units="unitless"
 					description="Method for interpolating tracer values from layer centers to layer edges"
 					possible_values="'spline' and 'stencil'"
+=======
+	<nml_record name="advection">
+		<nml_option name="config_vert_tracer_adv" type="character" default_value="stencil" units="unitless"
+		            description="Method for interpolating tracer values from layer centers to layer edges"
+		            possible_values="'spline' and 'stencil'"
+>>>>>>> a365deb25 (Modifying namelist character types to not have two layers of quotes.)
 		/>
 		<nml_option name="config_vert_tracer_adv_order" type="integer" default_value="3" units="unitless"
 					description="Order of polynomial used for tracer reconstruction at layer edges"
@@ -859,10 +970,17 @@
 					possible_values="any positive real, typically 1.0e-3"
 		/>
 	</nml_record>
+<<<<<<< HEAD
 	<nml_record name="ocean_constants">
 		<nml_option name="config_density0" type="real" default_value="1026.0" units="kg m^{-3}"
 					description="Density used as a coefficient of the pressure gradient terms, $\rho_0$. This is a constant due to the Boussinesq approximation."
 					possible_values="any positive real, but typically 1000-1035"
+=======
+	<nml_record name="pressure_gradient">
+		<nml_option name="config_pressure_gradient_type" type="character" default_value="pressure_and_zmid" units="unitless"
+		            description="Form of pressure gradient terms in momentum equation. For most applications, the gradient of pressure and layer mid-depth are appropriate.  For isopycnal coordinates, one may use the gradient of the Montgomery potential."
+		            possible_values="'pressure_and_zmid' or 'MontgomeryPotential'"
+>>>>>>> a365deb25 (Modifying namelist character types to not have two layers of quotes.)
 		/>
 	</nml_record>
 	<nml_record name="pressure_gradient" mode="forward">
@@ -876,6 +994,7 @@
 		/>
 	</nml_record>
 	<nml_record name="eos">
+<<<<<<< HEAD
 		<nml_option name="config_eos_type" type="character" default_value="linear" units="unitless"
 					description="Character string to choose EOS formulation"
 					possible_values="Jackett McDougall EOS = 'jm' and Linear EOS = 'linear'"
@@ -919,6 +1038,11 @@
 		<nml_option name="config_land_ice_cavity_freezing_temperature_reference_pressure" type="real" default_value="0.0" units="Pa"
 					description="The reference pressure above which the freezing temperature is equal to config_freezing_temperature_coeff_0 in land-ice cavities."
 					possible_values="Any positive real number"
+=======
+		<nml_option name="config_eos_type" type="character" default_value="jm" units="unitless"
+		            description="Character string to choose EOS formulation"
+		            possible_values="Jackett McDougall EOS = 'jm' and Linear EOS = 'linear'"
+>>>>>>> a365deb25 (Modifying namelist character types to not have two layers of quotes.)
 		/>
 	</nml_record>
 	<nml_record name="eos_linear">
